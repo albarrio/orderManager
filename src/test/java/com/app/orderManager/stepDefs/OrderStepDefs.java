@@ -72,7 +72,4 @@ public class OrderStepDefs extends SpringIntegrationTest {
         assert response.getBody().print().contains(statusCode);
     }
 
-    @When("There are two orders in the queue")
-    public void thereAreTwoOrdersInTheQueue() {
-    }
 }

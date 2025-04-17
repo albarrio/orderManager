@@ -29,18 +29,27 @@ public class CompleteOrderStepDefs extends SpringIntegrationTest {
     @Autowired
     OperatorRepository operatorRepository;
 
-    @Given("I am a Operator of the system")
-    public void iAmAOperatorOfTheSystem() {
-        operator = new Operator("Mario", "Chief");
-        Operator saveOperator = operatorRepository.save(operator);
-        assert( saveOperator.getId() != null );
-    }
-
     @When("There are orders in the queue")
     public void thereAreTwoOrdersInTheQueue() {
-        response = RestAssured.get("http://localhost:8080/order/list/size");
+        customer = new Customer("Tom", "tom@gmail.com");
+        Customer saveCustomer = customerRepository.save(customer);
+        assert( saveCustomer.getId() != null );
+        assert ( saveCustomer.getName().equals("Tom") );
+
+        firstOrder = new Order();
+        firstOrder.setCustomerId(customer.getId());
+
+        response = RestAssured.given()
+                .contentType("application/json")
+                .body(firstOrder)
+                .post("http://localhost:8080/order/create");
+        assert response.getStatusCode() == 200;
+        assert response.getBody().print() != null;
+
+        response = RestAssured.get("http://localhost:8080/order/size");
         assert response != null;
         System.out.println("Response: " + response.getBody().print());
+        assert( Integer.parseInt(response.getBody().print()) > 0 ) : "There are no orders in the queue";
     }
 
     @Then("I can process the next order in queue")

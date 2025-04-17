@@ -50,7 +50,7 @@ public class OrderController {
         return order.getId().toString();
     }
 
-    @GetMapping("/order/list/size")
+    @GetMapping("/order/size")
     public String processOrderSize() {
         return String.valueOf(orderProcessService.getSize());
     }

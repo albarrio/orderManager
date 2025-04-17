@@ -36,13 +36,6 @@ public class ProcessOrderStepDefs extends SpringIntegrationTest {
         assert( saveOperator.getId() != null );
     }
 
-    @When("There are orders in the queue")
-    public void thereAreTwoOrdersInTheQueue() {
-        response = RestAssured.get("http://localhost:8080/order/list/size");
-        assert response != null;
-        System.out.println("Response: " + response.getBody().print());
-    }
-
     @Then("I can process the first order in queue")
     public void iCanProcessTheFirstOrderInQueue() {
         response = RestAssured.get("http://localhost:8080/order/process");
