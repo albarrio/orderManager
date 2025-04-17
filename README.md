@@ -22,5 +22,15 @@ ma verranno create delle API al fine di ordinare le pizze e aggiornarne lo stato
 Decidiamo di utilizzare il framework Spring e Java (versione a tua scelta).
 
 Suggerimento: potrebbe essere una buona idea avere dei test sul codice oggetto di sviluppo”
+
+# Util for run feature Test
+In this project we use the Cucumber-JVM library to run the feature test.
+for Running all test scenarios use follow class, as JUnit test:
+```java 
+
+public class CucumberIntegrationTest{}
+
+```
+
 # Author
 Alberto Barrionuevo
