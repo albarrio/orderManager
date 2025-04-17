@@ -1,4 +1,4 @@
-#Process Order.feature
+#Complete Order.feature
   Feature: Complete an order and get order status
     As a Operator
     I want to be able to complete an order
