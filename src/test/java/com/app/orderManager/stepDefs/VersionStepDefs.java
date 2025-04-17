@@ -1,29 +1,29 @@
-package com.app.orderManager;
+package com.app.orderManager.stepDefs;
 
+import com.app.orderManager.SpringIntegrationTest;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
-import java.io.IOException;
-
-public class VersionStepDefs extends SpringIntegrationTest{
+public class VersionStepDefs extends SpringIntegrationTest {
 
     private Response response;
 
-    @When("client calls \\/version")
-    public void clientCallsVersion() throws IOException, InterruptedException {
+    @When("client calls get version")
+    public void clientCallsVersion() {
         response = RestAssured.get("http://localhost:8080/version");
+        assert response != null;
     }
 
     @Then("client receives status code {int}")
-    public void clientReceivesStatusCode(int statusCode) throws InterruptedException, IOException {
+    public void clientReceivesStatusCode(int statusCode) {
         assert(statusCode == response.getStatusCode());
     }
 
     @And("client receives server version {string}")
-    public void clientReceivesServerVersion(String version) throws InterruptedException, IOException {
+    public void clientReceivesServerVersion(String version) {
         assert( response.body().print() ).contains( version );
     }
 
